@@ -1,0 +1,51 @@
+---
+name: pharma-network-consumer
+version: 1.0.0
+client:
+  organization: Consumer
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Consumer:
+    mspid: consumerMSP
+    peers:
+    - peer0.consumer.pharma-network.com
+
+    certificateAuthorities:
+    - ca.consumer.pharma-network.com
+peers:
+  peer0.consumer.pharma-network.com:
+    url: grpcs://localhost:10051
+    tlsCACerts:
+      pem: |
+          -----BEGIN CERTIFICATE-----
+          MIICFjCCAb2gAwIBAgIUHOIvGaNIpLNouu7zmwoLh8Qxl14wCgYIKoZIzj0EAwIw
+          aDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK
+          EwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt
+          Y2Etc2VydmVyMB4XDTI0MDMwODEzNDcwMFoXDTM5MDMwNTEzNDcwMFowaDELMAkG
+          A1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl
+          cmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy
+          dmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE0q5LidgDuq/y2xoec6b/kFZh
+          SBGKFCNLCw0IMJTPlGL8QxDifDF4goBQEvy8Dcqpj4wh4EmK2ruvYIWSa/gFB6NF
+          MEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE
+          FCT5fi6E+TueiIIoTQmk4VrI8Nz1MAoGCCqGSM49BAMCA0cAMEQCIAnnpBF6B/px
+          nwYgFpKxreJ8elhaeIgJo3RmFtF/JVfWAiAzmhjroDaAlCCzy3/BBa2NcMbiVKS3
+          UEhzSMLXggS4jw==
+          -----END CERTIFICATE-----
+
+
+    grpcOptions:
+      ssl-target-name-override: peer0.consumer.pharma-network.com
+      hostnameOverride: peer0.consumer.pharma-network.com
+
+certificateAuthorities:
+  ca.consumer.pharma-network.com:
+    url: https://localhost:10054
+    caName: ca_consumer
+    tlsCACerts:
+      pem:
+        - /home/ram/pharma-network/network/organizations/peerOrganizations/consumer.pharma-network.com/ca/ca.consumer.pharma-network.com-cert.pem
+    httpOptions:
+      verify: false

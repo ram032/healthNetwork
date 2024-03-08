@@ -1,0 +1,51 @@
+---
+name: pharma-network-distributor
+version: 1.0.0
+client:
+  organization: Distributor
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Distributor:
+    mspid: distributorMSP
+    peers:
+    - peer0.distributor.pharma-network.com
+    certificateAuthorities:
+    - ca.distributor.pharma-network.com
+peers:
+  peer0.distributor.pharma-network.com:
+    url: grpcs://localhost:8051
+    tlsCACerts:
+      pem: |
+          -----BEGIN CERTIFICATE-----
+          MIICFzCCAb2gAwIBAgIUNrC9xPAFNpt1qPTouMGtowDIeJowCgYIKoZIzj0EAwIw
+          aDELMAkGA1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQK
+          EwtIeXBlcmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMt
+          Y2Etc2VydmVyMB4XDTI0MDMwODEzNDcwMFoXDTM5MDMwNTEzNDcwMFowaDELMAkG
+          A1UEBhMCVVMxFzAVBgNVBAgTDk5vcnRoIENhcm9saW5hMRQwEgYDVQQKEwtIeXBl
+          cmxlZGdlcjEPMA0GA1UECxMGRmFicmljMRkwFwYDVQQDExBmYWJyaWMtY2Etc2Vy
+          dmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEItr18pCr30nbHPYBSHdd3Wt3
+          eMeXQbulgc2sMC3h839g8N+JhdK4uOl7nSx0C9ZPpUsVjbVW/uKjXmAgoLKY/aNF
+          MEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYE
+          FLFlOP69AHGgMElIu85NqsLji56lMAoGCCqGSM49BAMCA0gAMEUCIQCQR8LO6a81
+          IFGwmibWiC9OBiy6PWr8J7l8m2nnT/mPEQIgelCAsEZySt6fEvJO7r8SgGANaJwf
+          tE44PEci03TJZak=
+          -----END CERTIFICATE-----
+
+
+
+    grpcOptions:
+      ssl-target-name-override: peer0.distributor.pharma-network.com
+      hostnameOverride: peer0.distributor.pharma-network.com
+
+certificateAuthorities:
+  ca.distributor.pharma-network.com:
+    url: https://localhost:8054
+    caName: ca_distributor
+    tlsCACerts:
+      pem:
+        - /home/ram/pharma-network/network/organizations/peerOrganizations/distributor.pharma-network.com/ca/ca.distributor.pharma-network.com-cert.pem
+    httpOptions:
+      verify: false
